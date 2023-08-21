@@ -1,0 +1,35 @@
+%{
+%}
+
+%%
+[0-9]+     
+[-+]        { printf("Operator: %s\n", yytext); return yytext[0]; }
+[*\/]      
+.     
+%%
+
+int yywrap() {
+}
+
+int main() {
+    int num1=1000, num2=2, result;
+    char ops;
+    printf("operation to be executed: ");
+    scanf(" %c", &ops);
+    if (ops == '+' || ops == '-' || ops == '*' || ops == '/') {
+        if (ops == '/' && num2 == 0) {
+            printf("invalid.\n");
+        } else {
+            switch (ops) {
+                case '+': result = num1 + num2; break;
+                case '-': result = num1 - num2; break;
+                case '*': result = num1 * num2; break;
+                case '/': result = num1 / num2; break;
+            }
+            printf("Result: %d %c %d = %d\n", num1, ops, num2, result);
+        }
+    } else {
+        printf("Invalid operator.\n");
+    }
+    return 0;
+}
